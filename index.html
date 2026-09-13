@@ -8,62 +8,119 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#151925;font-family:Arial,sans-serif}button{font:inherit;border:0;background:none;padding:0;touch-action:none}#game{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}.room{position:relative;width:2528px;height:1368px;flex:none;background:url('https://i.ibb.co/jvMy9yFY/room.png') center/100% 100% no-repeat;overflow:hidden;user-select:none}.layer{position:absolute;inset:0;pointer-events:none}.ui-left{position:absolute;left:36px;top:360px;display:flex;flex-direction:column;gap:22px;z-index:40}.img-button{cursor:pointer}.img-button img{display:block;width:auto;height:auto}.ui-left img{width:150px}.ui-hand{position:absolute;right:30px;top:345px;z-index:40}.ui-hand img{width:170px}.menu{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:520px;height:430px;background:rgba(111,174,172,.96);border:3px solid #253746;z-index:80;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;padding:40px 22px 18px;box-shadow:0 10px 0 rgba(0,0,0,.15)}.menu.hidden,.confirm.hidden{display:none}.close{position:absolute;right:8px;top:5px;color:#fff;background:#000;font-weight:900;font-size:32px;width:42px;height:42px;line-height:42px;cursor:pointer;z-index:5}.choice{display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:22px;cursor:pointer;text-shadow:1px 1px #26353a}.choice img{max-width:175px;max-height:150px;object-fit:contain;image-rendering:auto}.food-choice img{max-width:170px;max-height:140px}.till{position:absolute;left:0;top:0;width:230px;pointer-events:auto;cursor:pointer;transform-origin:center bottom;transition:filter .12s}.till.walking{animation:bob .75s ease-in-out infinite}.till.petting{animation:squish .22s ease-in-out infinite}.till-img{display:block;width:100%;height:auto;pointer-events:none}.food,.hand{position:absolute;pointer-events:auto;cursor:grab;z-index:20;touch-action:none}.food{width:170px;transform:translate(-50%,-50%);filter:drop-shadow(2px 4px 0 rgba(0,0,0,.16))}.food img,.hand img{display:block;width:100%;height:auto;pointer-events:none}.hand{width:155px;transform:translate(-50%,-50%);z-index:30}.heart{position:absolute;width:105px;pointer-events:none;z-index:70;animation:heartpop 1.5s ease-in-out forwards}.heart img{width:100%}.confirm{position:absolute;inset:0;background:rgba(0,0,0,.25);z-index:100;display:flex;align-items:center;justify-content:center}.confirm-box{background:#70aeac;border:3px solid #253746;padding:35px 45px;text-align:center;color:white;font-size:32px;font-weight:800;box-shadow:0 8px 0 rgba(0,0,0,.25)}.confirm-actions{display:flex;gap:25px;justify-content:center;margin-top:28px}.confirm-actions button{background:#fff;color:#222;border:3px solid #253746;padding:9px 26px;font-weight:900;cursor:pointer}.overlay{position:fixed;inset:0;z-index:9999;background:#151925;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;padding:20px}.gate-card{max-width:500px;background:#70aeac;border:4px solid #253746;padding:35px;box-shadow:0 10px 0 #080a10}.gate-title{font-size:36px;font-weight:900;margin-bottom:16px}.gate-card button{margin-top:25px;background:#fff;border:3px solid #253746;padding:12px 28px;font-weight:900;cursor:pointer}.gate-card #gateText{font-size:20px;line-height:1.4}.dragging{cursor:grabbing!important}.eating{animation:eatbounce .18s ease-in-out infinite!important}.fade-heart{animation:heartpop 1.5s ease-in-out forwards}@keyframes bob{0%,100%{transform:translate(-50%,-50%) scaleX(var(--flip,1))}50%{transform:translate(-50%,-60%) scaleX(var(--flip,1))}}@keyframes squish{0%,100%{transform:translate(-50%,-50%) scaleX(var(--flip,1))}50%{transform:translate(-50%,-50%) scale(1.08,.9) scaleX(var(--flip,1))}}@keyframes eatbounce{0%,100%{transform:translate(-50%,-50%) scaleX(var(--flip,1))}50%{transform:translate(-50%,-45%) scale(.96,1.04) scaleX(var(--flip,1))}}@keyframes heartpop{0%{opacity:0;transform:translate(-50%,8px) scale(.5)}18%{opacity:1;transform:translate(-50%,0) scale(1.05)}65%{opacity:1;transform:translate(-50%,-16px) scale(1)}100%{opacity:0;transform:translate(-50%,-32px) scale(.9)}}@media (orientation:portrait){#game{display:none}.overlay{display:flex}}@media (orientation:landscape) and (pointer:coarse){.overlay{display:none}}@media (pointer:fine){.overlay{display:flex}.gate-card #gateText:after{content:' Please open this on a touchscreen phone.'}}@media (max-aspect-ratio:1/1){.overlay{display:flex}}
 
 
-/* FINAL MOBILE UI SIZE / POSITION FIXES */
+/* LARGE MOBILE UI / TOOL VISIBILITY FIX — V2 */
+.room{
+  isolation:isolate;
+}
+
+/* These controls are moved to BODY by JS, so room scaling cannot shrink them. */
 .ui-left{
-  left:55px !important;
-  top:300px !important;
-  gap:34px !important;
-  z-index:120 !important;
+  position:fixed !important;
+  left:18px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  display:flex !important;
+  flex-direction:column !important;
+  gap:14px !important;
+  z-index:150 !important;
+}
+.ui-left .img-button{
+  width:150px !important;
+  height:82px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:visible !important;
 }
 .ui-left img{
-  width:360px !important;
+  width:220px !important;
   max-width:none !important;
+  height:auto !important;
 }
+
 .ui-hand{
-  right:55px !important;
-  top:285px !important;
-  z-index:120 !important;
+  position:fixed !important;
+  right:18px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:160px !important;
+  height:90px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:visible !important;
+  z-index:1000 !important;
 }
 .ui-hand img{
-  width:360px !important;
+  width:220px !important;
   max-width:none !important;
+  height:auto !important;
 }
-#tillLayer,#foodLayer,#toolLayer,#fxLayer{
-  z-index:50;
+
+/* Never let the side controls cover the Till/Food selection boxes or their X button. */
+body.menu-open .ui-left,
+body.menu-open .ui-hand{
+  visibility:hidden !important;
+  pointer-events:none !important;
 }
-#toolLayer{z-index:70 !important;}
+
+/* Game objects stay above the room but below the fixed controls. */
+#tillLayer{z-index:40 !important;}
+#foodLayer{z-index:50 !important;}
+#toolLayer{z-index:80 !important;}
+#fxLayer{z-index:90 !important;}
+#toolLayer .hand{
+  z-index:200 !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+
 .till{
-  width:440px !important;
+  width:600px !important;
+  z-index:10 !important;
   transform:translate(-50%,-50%) scaleX(var(--flip,1)) !important;
 }
 .food{
-  width:300px !important;
+  width:500px !important;
 }
 .hand{
-  width:300px !important;
+  width:500px !important;
+  z-index:200 !important;
 }
+
 .menu{
-  width:780px !important;
-  height:600px !important;
-  padding:60px 35px 25px !important;
-  gap:10px !important;
+  width:900px !important;
+  height:700px !important;
+  padding:75px 40px 30px !important;
+  gap:14px !important;
+  z-index:400 !important;
 }
 .choice{
-  font-size:30px !important;
+  font-size:36px !important;
 }
 .choice img{
-  max-width:260px !important;
-  max-height:220px !important;
+  max-width:300px !important;
+  max-height:260px !important;
 }
 .food-choice img{
-  max-width:245px !important;
-  max-height:200px !important;
+  max-width:280px !important;
+  max-height:230px !important;
 }
 .close{
-  width:58px !important;
-  height:58px !important;
-  line-height:58px !important;
-  font-size:42px !important;
+  width:80px !important;
+  height:80px !important;
+  line-height:80px !important;
+  font-size:54px !important;
+}
+.confirm{
+  z-index:500 !important;
+}
+.confirm-box{
+  font-size:38px !important;
+}
+.confirm-actions button{
+  font-size:34px !important;
+  padding:14px 36px !important;
 }
 
 </style>
@@ -119,12 +176,27 @@
 <script>
 // @ts-nocheck
 const room = document.getElementById('room');
+
+/* IMPORTANT: room is scaled to fit landscape phones. The control buttons
+   must not live inside that transformed element, otherwise even huge CSS
+   sizes become tiny on-screen. */
+const uiLeft = document.querySelector('.ui-left');
+const uiHand = document.querySelector('.ui-hand');
+
+if(uiLeft) document.body.appendChild(uiLeft);
+if(uiHand) document.body.appendChild(uiHand);
+
 const tillLayer = document.getElementById('tillLayer');
 const foodLayer = document.getElementById('foodLayer');
 const toolLayer = document.getElementById('toolLayer');
 const fxLayer = document.getElementById('fxLayer');
 const tillMenu = document.getElementById('tillMenu');
 const foodMenu = document.getElementById('foodMenu');
+function syncMenuControls(){
+  const menuOpen = !tillMenu?.classList.contains('hidden') || !foodMenu?.classList.contains('hidden');
+  document.body.classList.toggle('menu-open', menuOpen);
+}
+
 const confirmBox = document.getElementById('confirm');
 const bgm = document.getElementById('bgm');
 const nom = document.getElementById('nom');
@@ -170,22 +242,29 @@ document.getElementById('tillBtn').addEventListener('click',()=>{
   if(till) return;
   foodMenu.classList.add('hidden');
   tillMenu.classList.remove('hidden');
+  syncMenuControls();
 });
 document.getElementById('foodBtn').addEventListener('click',()=>{
   tillMenu.classList.add('hidden');
   foodMenu.classList.remove('hidden');
+  syncMenuControls();
 });
 document.getElementById('handBtn').addEventListener('click',()=>spawnHand());
 
-document.querySelectorAll('.close').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.close).classList.add('hidden')));
+document.querySelectorAll('.close').forEach(b=>b.addEventListener('click',()=>{
+  document.getElementById(b.dataset.close).classList.add('hidden');
+  syncMenuControls();
+}));
 
 document.querySelectorAll('[data-till]').forEach(b=>b.addEventListener('click',()=>{
   createTill(b.dataset.till);
   tillMenu.classList.add('hidden');
+  syncMenuControls();
 }));
 document.querySelectorAll('[data-food]').forEach(b=>b.addEventListener('click',()=>{
   spawnFood(b.dataset.food);
   foodMenu.classList.add('hidden');
+  syncMenuControls();
 }));
 
 document.getElementById('removeNo').addEventListener('click',()=>confirmBox.classList.add('hidden'));
@@ -258,6 +337,9 @@ function spawnHand(){
   h.style.top='684px';
   h.innerHTML='<img src="https://i.ibb.co/qMjCTrsN/Grabbing.png" alt="hand tool">';
   toolLayer.appendChild(h);
+  h.style.zIndex='200';
+  h.style.visibility='visible';
+  h.style.opacity='1';
   handTool=h;
   makeDraggable(h,'hand');
 }
@@ -286,8 +368,8 @@ function makeDraggable(el,type){
     if(type==='food' && wasOver) eatFood(el);
     if(type==='hand'){
       setPetting(false);
-      handTool=null;
-      el.remove();
+      /* Keep the hand tool visible after release. It only disappears if the
+         game explicitly removes it later. */
     }
     activeDrag=null;
   };
